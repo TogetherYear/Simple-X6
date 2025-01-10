@@ -1,0 +1,26 @@
+{
+    "name": "application",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "prettier": "prettier --write .",
+        "build": "vite build",
+        "postbuild": "node ./Shell/Compress.cjs",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.2",
+        "@vitejs/plugin-vue": "^5.2.1",
+        "compressing": "^1.10.1",
+        "prettier": "^3.4.2",
+        "sass": "1.79.4",
+        "typescript": "^5.7.2",
+        "vite": "^6.0.5"
+    },
+    "dependencies": {
+        "@antv/x6": "^2.18.1",
+        "@antv/x6-vue-shape": "^2.1.2",
+        "vue": "^3.5.13"
+    }
+}
