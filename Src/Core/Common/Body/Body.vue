@@ -1,13 +1,4 @@
 <script lang="ts" setup>
-import { Body } from './Body'
-
-const instance = new Body()
-
-const {
-
-} = instance.InitStates()
-
-instance.Run()
 </script>
 
 <template>

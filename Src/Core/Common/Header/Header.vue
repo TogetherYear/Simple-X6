@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Header } from './Header'
-
 const props = withDefaults(
     defineProps<{
         danager?: boolean
@@ -10,14 +8,6 @@ const props = withDefaults(
         danager: false,
     }
 );
-
-const instance = new Header()
-
-const {
-
-} = instance.InitStates()
-
-instance.Run()
 </script>
 
 <template>

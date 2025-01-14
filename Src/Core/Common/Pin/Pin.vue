@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Pin } from './Pin'
-
 const props = withDefaults(
     defineProps<{
         title: string
@@ -11,14 +9,6 @@ const props = withDefaults(
         archor: 'right'
     }
 );
-
-const instance = new Pin()
-
-const {
-
-} = instance.InitStates()
-
-instance.Run()
 </script>
 
 <template>

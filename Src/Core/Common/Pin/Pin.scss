@@ -1,6 +1,7 @@
 .Pin {
     position: absolute;
     width: 50%;
+    pointer-events: none;
 
     .PinCon {
         position: relative;
@@ -22,6 +23,7 @@
             line-height: 20px;
             font-size: 14px;
             color: #00ca87;
+
         }
 
         .Circle {
@@ -36,6 +38,7 @@
             margin-right: 10px;
             cursor: pointer;
             transition: all 0.15s;
+            pointer-events: all;
 
             &:hover {
                 border: 1px solid #2b9471;

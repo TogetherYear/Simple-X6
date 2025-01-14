@@ -1,16 +1,7 @@
 <script lang="ts" setup>
-import { Generate } from './Generate'
 import Header from '@/Core/Common/Header/Header.vue';
 import Body from '@/Core/Common/Body/Body.vue'
 import Pin from '@/Core/Common/Pin/Pin.vue'
-
-const instance = new Generate()
-
-const {
-
-} = instance.InitStates()
-
-instance.Run()
 </script>
 
 <template>
