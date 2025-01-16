@@ -6,15 +6,15 @@ import { TGenerate } from '../Decorators/TGenerate';
 @TGenerate.Generate({
     width: 180,
     height: 60,
-    port: [{ id: 'StartOutputRoot', type: 'Output', label: '初始化', row: 0 }]
+    port: [{ id: 'SequenceInputRoot', type: 'Input', label: '序列', row: 0 }]
 })
-class Start extends Actor {
-    constructor(ctx: Blueprint.Context, options: Blueprint.Actor.IStart = {}) {
+class Sequence extends Actor {
+    constructor(ctx: Blueprint.Context, options: Blueprint.Actor.ISequence = {}) {
         super(ctx, options);
     }
 
     public get O() {
-        return this.options as Blueprint.Actor.IStart;
+        return this.options as Blueprint.Actor.ISequence;
     }
 
     public override Destroy(): void {
@@ -27,4 +27,4 @@ class Start extends Actor {
     }
 }
 
-export { Start };
+export { Sequence };

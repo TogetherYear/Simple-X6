@@ -6,6 +6,7 @@ import { TTest } from '@/Core/Decorators/TTest';
 
 import { Start } from '../Actor/Start';
 import { Actor } from '../Base/Actor';
+import { Sequence } from '../Actor/Sequence';
 
 class Graph extends Manager {
     constructor(ctx: Blueprint.Context, options: Blueprint.Manager.IGraph = {}) {
@@ -44,6 +45,27 @@ class Graph extends Manager {
                         factor: 10
                     }
                 ]
+            },
+            highlighting: {
+                default: {
+                    name: 'stroke',
+                    args: {
+                        padding: 0,
+                        attrs: {
+                            'stroke-width': 4,
+                            stroke: '#dd8080'
+                        }
+                    }
+                }
+            },
+            connecting: {
+                snap: true,
+                allowBlank: false,
+                allowNode: false,
+                allowMulti: false,
+                allowLoop: false,
+                allowEdge: false,
+                allowPort: true
             }
         });
 
@@ -75,19 +97,11 @@ class Graph extends Manager {
                     }
                 }
             });
-            //@ts-ignore
-            this.actors.get(e.edge.source.cell)?.OnEdgeAdd(e.edge);
-        });
-        this.graph.on('edge:change:target', (e) => {
-            //@ts-ignore
-            if (e.current.cell) {
-                //@ts-ignore
-                this.actors.get(e.edge.source.cell)?.OnEdgeLinkTargetChange(e.edge);
-            }
         });
 
-        this.graph.on('edge:change:router', () => {
-            console.log('DSADAS');
+        this.graph.on('edge:connected', (e) => {
+            //@ts-ignore
+            this.actors.get(e.edge.source.cell)?.OnEdgeConnected(e.edge);
         });
     }
 
@@ -96,9 +110,14 @@ class Graph extends Manager {
         this.graph.dispose();
     }
 
-    @TTest.BindFunction<Graph>((instance) => `Shape`)
-    private AddCustomShape() {
+    @TTest.BindFunction('Start')
+    private AddStart() {
         const n = new Start(this.ctx);
+    }
+
+    @TTest.BindFunction('Sequence')
+    private AddSequence() {
+        const n = new Sequence(this.ctx);
     }
 
     public Add(actor: Actor) {

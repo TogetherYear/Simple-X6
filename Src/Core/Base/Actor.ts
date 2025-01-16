@@ -15,14 +15,6 @@ class Actor extends Entity {
 
     public body!: X6.Node;
 
-    public startEdges = new Map<string, X6.Edge>();
-
-    public endEdges = new Map<string, X6.Edge>();
-
-    public inputBodies = new Map<string, X6.Node>();
-
-    public outputBodies = new Map<string, X6.Node>();
-
     public get O() {
         return this.options as Blueprint.Base.IActor;
     }
@@ -31,9 +23,7 @@ class Actor extends Entity {
         this.ctx.Graph.Remove(this);
     }
 
-    public OnEdgeAdd(e: X6.Edge) {}
-
-    public OnEdgeLinkTargetChange(e: X6.Edge) {}
+    public OnEdgeConnected(e: X6.Edge) {}
 }
 
 export { Actor };

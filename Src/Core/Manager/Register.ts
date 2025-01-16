@@ -1,7 +1,6 @@
 import { Manager } from '../Base/Manager';
 import { Blueprint } from '../type';
 import { register } from '@antv/x6-vue-shape';
-const components = import.meta.glob('@/Core/Templates/**/*.vue');
 
 class Register extends Manager {
     constructor(ctx: Blueprint.Context, options: Blueprint.Manager.IRegister = {}) {
@@ -14,6 +13,7 @@ class Register extends Manager {
 
     public async Run(): Promise<void> {
         return new Promise((resolve, reject) => {
+            const components = import.meta.glob('@/Core/Templates/**/*.vue');
             const load: Array<Promise<void>> = [];
             for (let key in components) {
                 const shape = key.split('/').slice(-2)[0];
