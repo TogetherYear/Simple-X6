@@ -19,6 +19,8 @@ namespace Blueprint {
     export namespace Actor {
         export interface IStart extends Base.IEntity {}
         export interface ISequence extends Base.IEntity {}
+        export interface IBranch extends Base.IEntity {}
+        export interface IBoolean extends Base.IEntity {}
     }
 
     export type Context = {

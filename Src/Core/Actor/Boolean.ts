@@ -5,18 +5,15 @@ import { TGenerate } from '../Decorators/TGenerate';
 
 @TGenerate.Generate({
     width: 180,
-    port: [
-        { id: 'InputPort:Root', type: 'InputPort', label: '入口', row: 0 },
-        { id: 'InputValuePort:Boolean', type: 'InputValuePort', label: 'Boolean', row: 1 }
-    ]
+    port: [{ id: 'OutputValuePort:Boolean', type: 'OutputValuePort', label: 'Boolean', row: 0 }]
 })
-class Branch extends Actor {
-    constructor(ctx: Blueprint.Context, options: Blueprint.Actor.IBranch = {}) {
+class Boolean extends Actor {
+    constructor(ctx: Blueprint.Context, options: Blueprint.Actor.IBoolean = {}) {
         super(ctx, options);
     }
 
     public get O() {
-        return this.options as Blueprint.Actor.IBranch;
+        return this.options as Blueprint.Actor.IBoolean;
     }
 
     public override Destroy(): void {
@@ -33,4 +30,4 @@ class Branch extends Actor {
     }
 }
 
-export { Branch };
+export { Boolean };

@@ -6,13 +6,13 @@ import { TGenerate } from '../Decorators/TGenerate';
 @TGenerate.Generate({
     width: 180,
     port: [
-        { id: 'Input:Root', type: 'InputPort', label: '入口', row: 0 },
-        { id: 'Output:0', type: 'OutputPort', label: '出口_0', row: 0 },
-        { id: 'Output:1', type: 'OutputPort', label: '出口_1', row: 1 },
-        { id: 'Output:2', type: 'OutputPort', label: '出口_2', row: 2 },
-        { id: 'Output:3', type: 'OutputPort', label: '出口_3', row: 3 },
-        { id: 'Output:4', type: 'OutputPort', label: '出口_4', row: 4 },
-        { id: 'Output:5', type: 'OutputPort', label: '出口_5', row: 5 }
+        { id: 'InputPort:Root', type: 'InputPort', label: '入口', row: 0 },
+        { id: 'OutputtPort:0', type: 'OutputPort', label: '出口_0', row: 0 },
+        { id: 'OutputtPort:1', type: 'OutputPort', label: '出口_1', row: 1 },
+        { id: 'OutputtPort:2', type: 'OutputPort', label: '出口_2', row: 2 },
+        { id: 'OutputtPort:3', type: 'OutputPort', label: '出口_3', row: 3 },
+        { id: 'OutputtPort:4', type: 'OutputPort', label: '出口_4', row: 4 },
+        { id: 'OutputtPort:5', type: 'OutputPort', label: '出口_5', row: 5 }
     ]
 })
 class Sequence extends Actor {

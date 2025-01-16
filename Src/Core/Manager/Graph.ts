@@ -8,6 +8,7 @@ import { Start } from '../Actor/Start';
 import { Actor } from '../Base/Actor';
 import { Sequence } from '../Actor/Sequence';
 import { Branch } from '../Actor/Branch';
+import { Boolean } from '../Actor/Boolean';
 
 class Graph extends Manager {
     constructor(ctx: Blueprint.Context, options: Blueprint.Manager.IGraph = {}) {
@@ -138,6 +139,11 @@ class Graph extends Manager {
     @TTest.BindFunction('Branch')
     private AddBranch() {
         const n = new Branch(this.ctx);
+    }
+
+    @TTest.BindFunction('Boolean')
+    private AddBoolean() {
+        const n = new Boolean(this.ctx);
     }
 
     public Add(actor: Actor) {
