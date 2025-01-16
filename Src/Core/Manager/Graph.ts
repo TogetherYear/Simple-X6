@@ -7,6 +7,7 @@ import { TTest } from '@/Core/Decorators/TTest';
 import { Start } from '../Actor/Start';
 import { Actor } from '../Base/Actor';
 import { Sequence } from '../Actor/Sequence';
+import { Branch } from '../Actor/Branch';
 
 class Graph extends Manager {
     constructor(ctx: Blueprint.Context, options: Blueprint.Manager.IGraph = {}) {
@@ -90,7 +91,7 @@ class Graph extends Manager {
                 validateEdge(e) {
                     //@ts-ignore
                     const temp = `${e.edge.source.port}-${e.edge.target.port}`;
-                    if (temp.indexOf('Output') !== -1 && temp.indexOf('Input') !== -1) {
+                    if ((temp.indexOf('OutputPort') !== -1 && temp.indexOf('InputPort') !== -1) || (temp.indexOf('OutputValuePort') !== -1 && temp.indexOf('InputValuePort') !== -1)) {
                         return true;
                     } else {
                         return false;
@@ -113,7 +114,9 @@ class Graph extends Manager {
     private ListenEdge() {
         this.graph.on('edge:connected', (e) => {
             //@ts-ignore
-            this.actors.get(e.edge.source.cell)?.OnEdgeConnected(e.edge);
+            this.actors.get(e.edge.source.cell)?.OnEdgeConnectedAsSource(e.edge);
+            //@ts-ignore
+            this.actors.get(e.edge.target.cell)?.OnEdgeConnectedAsTarget(e.edge);
         });
     }
 
@@ -130,6 +133,11 @@ class Graph extends Manager {
     @TTest.BindFunction('Sequence')
     private AddSequence() {
         const n = new Sequence(this.ctx);
+    }
+
+    @TTest.BindFunction('Branch')
+    private AddBranch() {
+        const n = new Branch(this.ctx);
     }
 
     public Add(actor: Actor) {

@@ -23,7 +23,9 @@ class Actor extends Entity {
         this.ctx.Graph.Remove(this);
     }
 
-    public OnEdgeConnected(e: X6.Edge) {}
+    public OnEdgeConnectedAsSource(e: X6.Edge) {}
+
+    public OnEdgeConnectedAsTarget(e: X6.Edge) {}
 }
 
 export { Actor };

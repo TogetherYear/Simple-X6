@@ -5,7 +5,7 @@ import { TGenerate } from '../Decorators/TGenerate';
 
 @TGenerate.Generate({
     width: 180,
-    port: [{ id: 'Output:Root', type: 'Output', label: '初始化', row: 0 }]
+    port: [{ id: 'Output:Root', type: 'OutputPort', label: '出口', row: 0 }]
 })
 class Start extends Actor {
     constructor(ctx: Blueprint.Context, options: Blueprint.Actor.IStart = {}) {
@@ -21,8 +21,12 @@ class Start extends Actor {
         this.body.dispose();
     }
 
-    public override OnEdgeConnected(e: Edge) {
-        console.log('OnEdgeConnected:', e);
+    public override OnEdgeConnectedAsSource(e: Edge) {
+        console.log('OnEdgeConnectedAsSource:', e);
+    }
+
+    public override OnEdgeConnectedAsTarget(e: Edge) {
+        console.log('OnEdgeConnectedAsTarget:', e);
     }
 }
 

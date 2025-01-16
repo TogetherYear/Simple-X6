@@ -7,21 +7,16 @@ import { TGenerate } from '../Decorators/TGenerate';
     width: 180,
     port: [
         { id: 'Input:Root', type: 'InputPort', label: '入口', row: 0 },
-        { id: 'Output:0', type: 'OutputPort', label: '出口_0', row: 0 },
-        { id: 'Output:1', type: 'OutputPort', label: '出口_1', row: 1 },
-        { id: 'Output:2', type: 'OutputPort', label: '出口_2', row: 2 },
-        { id: 'Output:3', type: 'OutputPort', label: '出口_3', row: 3 },
-        { id: 'Output:4', type: 'OutputPort', label: '出口_4', row: 4 },
-        { id: 'Output:5', type: 'OutputPort', label: '出口_5', row: 5 }
+        { id: 'Input:Boolean', type: 'InputValuePort', label: 'Boolean', row: 1 }
     ]
 })
-class Sequence extends Actor {
-    constructor(ctx: Blueprint.Context, options: Blueprint.Actor.ISequence = {}) {
+class Branch extends Actor {
+    constructor(ctx: Blueprint.Context, options: Blueprint.Actor.IStart = {}) {
         super(ctx, options);
     }
 
     public get O() {
-        return this.options as Blueprint.Actor.ISequence;
+        return this.options as Blueprint.Actor.IStart;
     }
 
     public override Destroy(): void {
@@ -38,4 +33,4 @@ class Sequence extends Actor {
     }
 }
 
-export { Sequence };
+export { Branch };

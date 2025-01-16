@@ -7,7 +7,10 @@ type GenerateOptions = {
 };
 
 type Port = {
-    type: 'Input' | 'Output';
+    type: 'InputPort' | 'OutputPort' | 'InputValuePort' | 'OutputValuePort';
+    /**
+     * 必须 以 InputPort: OutputPort: InputValuePort: OutputValuePort: 开头
+     */
     id: string;
     label: string;
     row: number;
@@ -32,18 +35,18 @@ namespace TGenerate {
                         height: 45 + maxR * 25,
                         ports: {
                             groups: {
-                                Input: {
+                                InputPort: {
                                     attrs: {
                                         circle: {
                                             r: 6,
                                             magnet: true,
                                             stroke: '#cccccc',
                                             strokeWidth: 2,
-                                            fill: '#80dd80'
+                                            fill: '#3d7a3d'
                                         },
                                         text: {
                                             fontSize: 14,
-                                            fill: '#80dd80'
+                                            fill: '#3d7a3d'
                                         }
                                     },
                                     position: {
@@ -53,7 +56,28 @@ namespace TGenerate {
                                         position: 'right'
                                     }
                                 },
-                                Output: {
+                                InputValuePort: {
+                                    attrs: {
+                                        circle: {
+                                            r: 4,
+                                            magnet: true,
+                                            stroke: '#27d827',
+                                            strokeWidth: 2,
+                                            fill: '#27d827'
+                                        },
+                                        text: {
+                                            fontSize: 14,
+                                            fill: '#27d827'
+                                        }
+                                    },
+                                    position: {
+                                        name: 'absolute'
+                                    },
+                                    label: {
+                                        position: 'right'
+                                    }
+                                },
+                                OutputPort: {
                                     attrs: {
                                         circle: {
                                             r: 6,
@@ -73,13 +97,34 @@ namespace TGenerate {
                                     label: {
                                         position: 'left'
                                     }
+                                },
+                                OutputValuePort: {
+                                    attrs: {
+                                        circle: {
+                                            r: 4,
+                                            magnet: true,
+                                            stroke: '#0ea4e9',
+                                            strokeWidth: 2,
+                                            fill: '#0ea4e9'
+                                        },
+                                        text: {
+                                            fontSize: 14,
+                                            fill: '#0ea4e9'
+                                        }
+                                    },
+                                    position: {
+                                        name: 'absolute'
+                                    },
+                                    label: {
+                                        position: 'left'
+                                    }
                                 }
                             },
                             items: (options.port || []).map((p) => {
                                 return {
                                     id: p.id,
                                     group: p.type,
-                                    args: { x: p.type === 'Output' ? options.width - 20 : 20, y: 50 + p.row * 25 },
+                                    args: { x: p.type === 'OutputPort' || p.type === 'OutputValuePort' ? options.width - 20 : 20, y: 50 + p.row * 25 },
                                     attrs: {
                                         text: { text: p.label }
                                     }
