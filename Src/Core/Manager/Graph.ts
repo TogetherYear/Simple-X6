@@ -59,13 +59,43 @@ class Graph extends Manager {
                 }
             },
             connecting: {
-                snap: true,
+                connector: {
+                    name: 'smooth'
+                },
+                snap: {
+                    radius: 15
+                },
                 allowBlank: false,
                 allowNode: false,
                 allowMulti: false,
                 allowLoop: false,
                 allowEdge: false,
-                allowPort: true
+                allowPort: true,
+                createEdge() {
+                    const edge = new X6.Shape.Edge();
+                    edge.setAttrs({
+                        line: {
+                            stroke: '#ffffff',
+                            strokeWidth: 2,
+                            sourceMarker: {
+                                name: ''
+                            },
+                            targetMarker: {
+                                name: ''
+                            }
+                        }
+                    });
+                    return edge;
+                },
+                validateEdge(e) {
+                    //@ts-ignore
+                    const temp = `${e.edge.source.port}-${e.edge.target.port}`;
+                    if (temp.indexOf('Output') !== -1 && temp.indexOf('Input') !== -1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         });
 
@@ -81,24 +111,6 @@ class Graph extends Manager {
     }
 
     private ListenEdge() {
-        this.graph.on('edge:added', (e) => {
-            e.edge.connector = {
-                name: 'smooth'
-            };
-            e.edge.setAttrs({
-                line: {
-                    stroke: '#ffffff',
-                    strokeWidth: 2,
-                    sourceMarker: {
-                        name: ''
-                    },
-                    targetMarker: {
-                        name: ''
-                    }
-                }
-            });
-        });
-
         this.graph.on('edge:connected', (e) => {
             //@ts-ignore
             this.actors.get(e.edge.source.cell)?.OnEdgeConnected(e.edge);

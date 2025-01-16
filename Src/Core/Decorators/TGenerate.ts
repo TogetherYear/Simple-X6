@@ -29,7 +29,7 @@ namespace TGenerate {
                         x: ~~(Math.random() * 100),
                         y: ~~(Math.random() * 100),
                         width: options.width,
-                        height: (maxR + 2) * 30,
+                        height: 45 + maxR * 25,
                         ports: {
                             groups: {
                                 Input: {
@@ -79,7 +79,7 @@ namespace TGenerate {
                                 return {
                                     id: p.id,
                                     group: p.type,
-                                    args: { x: p.type === 'Output' ? options.width - 20 : 20, y: (p.row + 2) * 30 },
+                                    args: { x: p.type === 'Output' ? options.width - 20 : 20, y: 50 + p.row * 25 },
                                     attrs: {
                                         text: { text: p.label }
                                     }
