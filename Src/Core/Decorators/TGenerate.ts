@@ -9,7 +9,7 @@ type GenerateOptions = {
 type Port = {
     type: 'InputPort' | 'OutputPort' | 'InputValuePort' | 'OutputValuePort';
     /**
-     * 必须 以 InputPort: OutputPort: InputValuePort: OutputValuePort: 开头
+     * 必须以 type 开头
      */
     id: string;
     label: string;
