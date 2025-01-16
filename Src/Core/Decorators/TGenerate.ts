@@ -3,7 +3,6 @@ import { Actor } from '../Base/Actor';
 
 type GenerateOptions = {
     width: number;
-    height: number;
     port?: Array<Port>;
 };
 
@@ -23,12 +22,14 @@ namespace TGenerate {
                 }
 
                 private TGenerate_Generate_Create() {
+                    const i = (options.port || []).map((p) => p.row + 1);
+                    const maxR = Math.max(...i);
                     this.body = this.ctx.Graph.graph.addNode({
                         shape: C.name,
                         x: ~~(Math.random() * 100),
                         y: ~~(Math.random() * 100),
                         width: options.width,
-                        height: options.height,
+                        height: (maxR + 2) * 30,
                         ports: {
                             groups: {
                                 Input: {
@@ -78,7 +79,7 @@ namespace TGenerate {
                                 return {
                                     id: p.id,
                                     group: p.type,
-                                    args: { x: p.type === 'Output' ? options.width - 20 : 20, y: 30 + (p.row + 1) * 15 },
+                                    args: { x: p.type === 'Output' ? options.width - 20 : 20, y: (p.row + 2) * 30 },
                                     attrs: {
                                         text: { text: p.label }
                                     }

@@ -5,8 +5,15 @@ import { TGenerate } from '../Decorators/TGenerate';
 
 @TGenerate.Generate({
     width: 180,
-    height: 60,
-    port: [{ id: 'SequenceInputRoot', type: 'Input', label: '序列', row: 0 }]
+    port: [
+        { id: 'SequenceInputRoot', type: 'Input', label: '序列', row: 0 },
+        { id: 'SequenceOutput_0', type: 'Output', label: '执行_0', row: 0 },
+        { id: 'SequenceOutput_1', type: 'Output', label: '执行_1', row: 1 },
+        { id: 'SequenceOutput_2', type: 'Output', label: '执行_2', row: 2 },
+        { id: 'SequenceOutput_3', type: 'Output', label: '执行_3', row: 3 },
+        { id: 'SequenceOutput_4', type: 'Output', label: '执行_4', row: 4 },
+        { id: 'SequenceOutput_5', type: 'Output', label: '执行_5', row: 5 }
+    ]
 })
 class Sequence extends Actor {
     constructor(ctx: Blueprint.Context, options: Blueprint.Actor.ISequence = {}) {

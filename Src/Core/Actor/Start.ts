@@ -5,7 +5,6 @@ import { TGenerate } from '../Decorators/TGenerate';
 
 @TGenerate.Generate({
     width: 180,
-    height: 60,
     port: [{ id: 'StartOutputRoot', type: 'Output', label: '初始化', row: 0 }]
 })
 class Start extends Actor {
