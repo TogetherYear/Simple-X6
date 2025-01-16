@@ -124,7 +124,7 @@ namespace TGenerate {
                                 return {
                                     id: p.id,
                                     group: p.type,
-                                    args: { x: p.type === 'OutputPort' || p.type === 'OutputValuePort' ? options.width - 20 : 20, y: 50 + p.row * 25 },
+                                    args: { x: p.type === 'OutputPort' || p.type === 'OutputValuePort' ? options.width : 0, y: 50 + p.row * 25 },
                                     attrs: {
                                         text: { text: p.label }
                                     }

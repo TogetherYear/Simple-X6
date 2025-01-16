@@ -75,7 +75,7 @@ class Graph extends Manager {
                 allowPort: true,
                 createEdge() {
                     const edge = new X6.Shape.Edge();
-                    // edge.setZIndex(-1);
+                    edge.setZIndex(-1);
                     edge.setAttrs({
                         line: {
                             stroke: '#ffffff',
