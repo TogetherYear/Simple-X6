@@ -1,6 +1,6 @@
 import { TTest } from '@/Core/Decorators/TTest';
 import { Blueprint } from '../type';
-import { TEntity } from './Entity';
+import { Entity } from './Entity';
 import { TTool } from '@/Core/Decorators/TTool';
 import { TEvent } from '@/Core/Decorators/TEvent';
 import * as X6 from '@antv/x6';
@@ -8,21 +8,32 @@ import * as X6 from '@antv/x6';
 @TTest.Generate()
 @TTool.Generate()
 @TEvent.Generate()
-class Actor extends TEntity {
+class Actor extends Entity {
     constructor(ctx: Blueprint.Context, options: Blueprint.Base.IActor = {}) {
         super(ctx, options);
     }
 
     public body!: X6.Node;
 
+    public startEdges = new Map<string, X6.Edge>();
+
+    public endEdges = new Map<string, X6.Edge>();
+
+    public inputBodies = new Map<string, X6.Node>();
+
+    public outputBodies = new Map<string, X6.Node>();
+
     public get O() {
         return this.options as Blueprint.Base.IActor;
     }
 
-    /**
-     * 继承时 销毁物体必须调用 super.Destroy() 我要取消事件
-     */
-    public Destroy() {}
+    public Destroy() {
+        this.ctx.Graph.Remove(this);
+    }
+
+    public OnEdgeAdd(e: X6.Edge) {}
+
+    public OnEdgeLinkTargetChange(e: X6.Edge) {}
 }
 
 export { Actor };

@@ -1,6 +1,6 @@
-import { EventSystem } from '@/Core/Utils/EventSystem';
 import { Time } from '../Utils/Time';
 import { Resolve } from './index';
+import { Entity } from '../Base/Entity';
 
 namespace TTool {
     /**
@@ -17,7 +17,7 @@ namespace TTool {
      * 工具生成
      */
     export function Generate() {
-        return function <T extends new (...args: Array<any>) => EventSystem>(C: T) {
+        return function <T extends new (...args: Array<any>) => Entity>(C: T) {
             return class extends C {
                 constructor(...args: Array<any>) {
                     super(...args);
@@ -201,7 +201,7 @@ namespace TTool {
     /**
      * 防抖 默认 500 毫秒
      */
-    export function Debounce<T extends EventSystem>(delta: number | ((instance: T) => number) = 500) {
+    export function Debounce<T extends Entity>(delta: number | ((instance: T) => number) = 500) {
         return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
             //@ts-ignore
             if (target['tTool_Debounce_NeedCreate']) {
@@ -225,7 +225,7 @@ namespace TTool {
     /**
      * 节流 默认 500 毫秒
      */
-    export function Throttle<T extends EventSystem>(delta: number | ((instance: T) => number) = 500) {
+    export function Throttle<T extends Entity>(delta: number | ((instance: T) => number) = 500) {
         return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
             //@ts-ignore
             if (target['tTool_Throttle_NeedCreate']) {
@@ -249,7 +249,7 @@ namespace TTool {
     /**
      * 重复执行函数 必须是返回 Promise 的函数签名
      */
-    export function Retry<T extends EventSystem>(
+    export function Retry<T extends Entity>(
         retryCount: number | ((instance: T) => number),
         retryDelay: number | ((instance: T) => number),
         PassRetryCondition: (data: Record<string, unknown> | undefined | any) => boolean | Promise<boolean>
@@ -285,7 +285,7 @@ namespace TTool {
      * 自动间隔时间重复执行 Manager 在构造函数完成的下一次事件循环执行 Component 在 onMounted 后的下一次事件循环执行
      * condition 是否执行的条件 time 每次执行间隔
      */
-    export function Interval<T extends EventSystem>(condition: boolean | ((instance: T) => boolean), time: number | ((instance: T) => number)) {
+    export function Interval<T extends Entity>(condition: boolean | ((instance: T) => boolean), time: number | ((instance: T) => number)) {
         return function (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
             //@ts-ignore
             if (target['tTool_Interval_Need']) {

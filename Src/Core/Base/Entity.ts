@@ -2,7 +2,7 @@ import { EventSystem } from '@/Core/Utils/EventSystem';
 import { Time } from '@/Core/Utils/Time';
 import { Blueprint } from '../type';
 
-abstract class TEntity extends EventSystem {
+abstract class Entity extends EventSystem {
     constructor(ctx: Blueprint.Context, options: Blueprint.Base.IEntity = {}) {
         super();
         this.ctx = ctx;
@@ -23,4 +23,4 @@ abstract class TEntity extends EventSystem {
     public unique_Id = Time.GenerateRandomUid();
 }
 
-export { TEntity };
+export { Entity };

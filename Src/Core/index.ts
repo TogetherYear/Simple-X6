@@ -1,7 +1,6 @@
 import { Blueprint } from './type';
 import { Graph } from './Manager/Graph';
-
-import './Templates/index';
+import { Register } from './Manager/Register';
 
 /**
  * 这个函数只用来初始化 Manager
@@ -27,12 +26,18 @@ const Generate = (dom: HTMLElement): Promise<Blueprint.Context> => {
     return new Promise(async (resolve, reject) => {
         ctx.dom = dom;
 
+        ctx.Register = new Register(ctx);
+
         ctx.Graph = new Graph(ctx);
+
+        await ctx.Register.Run();
 
         ctx.Graph.Run();
 
         ctx.Destroy = () => {
             ctx.Graph.Destroy();
+
+            ctx.Register.Destroy();
 
             proxy.revoke();
         };

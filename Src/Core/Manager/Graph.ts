@@ -4,7 +4,8 @@ import { Blueprint } from '../type';
 import * as X6 from '@antv/x6';
 import { TTest } from '@/Core/Decorators/TTest';
 
-import { Generate } from '../Actor/Generate';
+import { Start } from '../Actor/Start';
+import { Actor } from '../Base/Actor';
 
 class Graph extends Manager {
     constructor(ctx: Blueprint.Context, options: Blueprint.Manager.IGraph = {}) {
@@ -12,6 +13,8 @@ class Graph extends Manager {
     }
 
     public graph!: X6.Graph;
+
+    private actors = new Map<string, Actor>();
 
     public get O() {
         return this.options as Blueprint.Manager.IGraph;
@@ -44,19 +47,66 @@ class Graph extends Manager {
             }
         });
 
+        this.ListenEvent();
+
         Resolve.then(() => {
             this.graph.centerContent();
         });
     }
 
-    public override Destroy(): void {
+    private ListenEvent() {
+        this.ListenEdge();
+    }
+
+    private ListenEdge() {
+        this.graph.on('edge:added', (e) => {
+            e.edge.connector = {
+                name: 'smooth'
+            };
+            e.edge.setAttrs({
+                line: {
+                    stroke: '#ffffff',
+                    strokeWidth: 2,
+                    sourceMarker: {
+                        name: ''
+                    },
+                    targetMarker: {
+                        name: ''
+                    }
+                }
+            });
+            //@ts-ignore
+            this.actors.get(e.edge.source.cell)?.OnEdgeAdd(e.edge);
+        });
+        this.graph.on('edge:change:target', (e) => {
+            //@ts-ignore
+            if (e.current.cell) {
+                //@ts-ignore
+                this.actors.get(e.edge.source.cell)?.OnEdgeLinkTargetChange(e.edge);
+            }
+        });
+
+        this.graph.on('edge:change:router', () => {
+            console.log('DSADAS');
+        });
+    }
+
+    public override Destroy() {
         super.Destroy();
         this.graph.dispose();
     }
 
     @TTest.BindFunction<Graph>((instance) => `Shape`)
     private AddCustomShape() {
-        const n = new Generate(this.ctx);
+        const n = new Start(this.ctx);
+    }
+
+    public Add(actor: Actor) {
+        this.actors.set(actor.body.id, actor);
+    }
+
+    public Remove(actor: Actor) {
+        this.actors.delete(actor.body.id);
     }
 }
 
