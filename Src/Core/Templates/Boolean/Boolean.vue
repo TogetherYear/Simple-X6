@@ -3,7 +3,7 @@ import Header from '@/Core/Common/Header/Header.vue';
 </script>
 
 <template>
-    <div class="Boolean">
+    <div class="Boolean Default">
         <Header :title="'Boolean'"></Header>
     </div>
 </template>

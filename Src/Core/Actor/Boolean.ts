@@ -5,7 +5,7 @@ import { TGenerate } from '../Decorators/TGenerate';
 
 @TGenerate.Generate({
     width: 180,
-    port: [{ id: 'OutputValuePort:Boolean', type: 'OutputValuePort', label: 'Boolean', row: 0 }]
+    port: [{ id: 'Boolean', type: 'OutputValuePort', label: 'Boolean', row: 0 }]
 })
 class Boolean extends Actor {
     constructor(ctx: Blueprint.Context, options: Blueprint.Actor.IBoolean = {}) {

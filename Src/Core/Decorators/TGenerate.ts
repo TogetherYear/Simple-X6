@@ -8,14 +8,100 @@ type GenerateOptions = {
 
 type Port = {
     type: 'InputPort' | 'OutputPort' | 'InputValuePort' | 'OutputValuePort';
-    /**
-     * 必须以 type 开头
-     */
     id: string;
     label: string;
     row: number;
 };
 namespace TGenerate {
+    // #5f0811
+    const group: {
+        [name: string]: PortManager.GroupMetadata;
+    } = {
+        InputPort: {
+            attrs: {
+                circle: {
+                    r: 5,
+                    magnet: true,
+                    stroke: '#dddddd',
+                    strokeWidth: 3,
+                    fill: '#dddddd00'
+                },
+                text: {
+                    fontSize: 14,
+                    fill: '#dddddd'
+                }
+            },
+            position: {
+                name: 'absolute'
+            },
+            label: {
+                position: 'right'
+            }
+        },
+        InputValuePort: {
+            attrs: {
+                circle: {
+                    r: 4,
+                    magnet: true,
+                    stroke: '#27d827',
+                    strokeWidth: 2,
+                    fill: '#27d827'
+                },
+                text: {
+                    fontSize: 14,
+                    fill: '#dddddd'
+                }
+            },
+            position: {
+                name: 'absolute'
+            },
+            label: {
+                position: 'right'
+            }
+        },
+        OutputPort: {
+            attrs: {
+                circle: {
+                    r: 5,
+                    magnet: true,
+                    stroke: '#dddddd',
+                    strokeWidth: 3,
+                    fill: '#dddddd00'
+                },
+                text: {
+                    fontSize: 14,
+                    fill: '#dddddd'
+                }
+            },
+            position: {
+                name: 'absolute'
+            },
+            label: {
+                position: 'left'
+            }
+        },
+        OutputValuePort: {
+            attrs: {
+                circle: {
+                    r: 4,
+                    magnet: true,
+                    stroke: '#0ea4e9',
+                    strokeWidth: 2,
+                    fill: '#0ea4e9'
+                },
+                text: {
+                    fontSize: 14,
+                    fill: '#dddddd'
+                }
+            },
+            position: {
+                name: 'absolute'
+            },
+            label: {
+                position: 'left'
+            }
+        }
+    };
     export function Generate(options: GenerateOptions) {
         return function <T extends new (...args: Array<any>) => Actor>(C: T) {
             return class extends C {
@@ -34,97 +120,12 @@ namespace TGenerate {
                         width: options.width,
                         height: 45 + maxR * 25,
                         ports: {
-                            groups: {
-                                InputPort: {
-                                    attrs: {
-                                        circle: {
-                                            r: 6,
-                                            magnet: true,
-                                            stroke: '#cccccc',
-                                            strokeWidth: 2,
-                                            fill: '#3d7a3d'
-                                        },
-                                        text: {
-                                            fontSize: 14,
-                                            fill: '#3d7a3d'
-                                        }
-                                    },
-                                    position: {
-                                        name: 'absolute'
-                                    },
-                                    label: {
-                                        position: 'right'
-                                    }
-                                },
-                                InputValuePort: {
-                                    attrs: {
-                                        circle: {
-                                            r: 4,
-                                            magnet: true,
-                                            stroke: '#27d827',
-                                            strokeWidth: 2,
-                                            fill: '#27d827'
-                                        },
-                                        text: {
-                                            fontSize: 14,
-                                            fill: '#27d827'
-                                        }
-                                    },
-                                    position: {
-                                        name: 'absolute'
-                                    },
-                                    label: {
-                                        position: 'right'
-                                    }
-                                },
-                                OutputPort: {
-                                    attrs: {
-                                        circle: {
-                                            r: 6,
-                                            magnet: true,
-                                            stroke: '#cccccc',
-                                            strokeWidth: 2,
-                                            fill: '#2b7ea5'
-                                        },
-                                        text: {
-                                            fontSize: 14,
-                                            fill: '#2b7ea5'
-                                        }
-                                    },
-                                    position: {
-                                        name: 'absolute'
-                                    },
-                                    label: {
-                                        position: 'left'
-                                    }
-                                },
-                                OutputValuePort: {
-                                    attrs: {
-                                        circle: {
-                                            r: 4,
-                                            magnet: true,
-                                            stroke: '#0ea4e9',
-                                            strokeWidth: 2,
-                                            fill: '#0ea4e9'
-                                        },
-                                        text: {
-                                            fontSize: 14,
-                                            fill: '#0ea4e9'
-                                        }
-                                    },
-                                    position: {
-                                        name: 'absolute'
-                                    },
-                                    label: {
-                                        position: 'left'
-                                    }
-                                }
-                            },
+                            groups: group,
                             items: (options.port || []).map((p) => {
                                 return {
-                                    id: p.id,
+                                    id: `${p.type}:${p.id}`,
                                     group: p.type,
-                                    args: { x: p.type === 'OutputPort' || p.type === 'OutputValuePort' ? options.width : 0, y: 50 + p.row * 25 },
+                                    args: { x: p.type === 'OutputPort' || p.type === 'OutputValuePort' ? options.width - 20 : 20, y: 50 + p.row * 25 },
                                     attrs: {
                                         text: { text: p.label }
                                     }

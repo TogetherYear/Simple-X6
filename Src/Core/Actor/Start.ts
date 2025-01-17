@@ -5,7 +5,7 @@ import { TGenerate } from '../Decorators/TGenerate';
 
 @TGenerate.Generate({
     width: 180,
-    port: [{ id: 'OutputPort:Root', type: 'OutputPort', label: '出口', row: 0 }]
+    port: [{ id: 'Root', type: 'OutputPort', label: '出口', row: 0 }]
 })
 class Start extends Actor {
     constructor(ctx: Blueprint.Context, options: Blueprint.Actor.IStart = {}) {

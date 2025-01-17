@@ -2,6 +2,8 @@ import { Blueprint } from './type';
 import { Graph } from './Manager/Graph';
 import { Register } from './Manager/Register';
 
+import './index.scss';
+
 /**
  * 这个函数只用来初始化 Manager
  */

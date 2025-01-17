@@ -3,7 +3,7 @@ import Header from '@/Core/Common/Header/Header.vue';
 </script>
 
 <template>
-    <div class="Start">
+    <div class="Start Default">
         <Header :title="'初始化'" :danager="true"></Header>
     </div>
 </template>

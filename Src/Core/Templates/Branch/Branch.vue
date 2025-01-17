@@ -3,7 +3,7 @@ import Header from '@/Core/Common/Header/Header.vue';
 </script>
 
 <template>
-    <div class="Branch">
+    <div class="Branch Default">
         <Header :title="'分支'"></Header>
     </div>
 </template>

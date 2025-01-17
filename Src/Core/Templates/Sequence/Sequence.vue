@@ -3,7 +3,7 @@ import Header from '@/Core/Common/Header/Header.vue';
 </script>
 
 <template>
-    <div class="Sequence">
+    <div class="Sequence Default">
         <Header :title="'序列'"></Header>
     </div>
 </template>
