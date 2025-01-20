@@ -93,7 +93,7 @@ class Graph extends Manager {
                 validateEdge(e) {
                     //@ts-ignore
                     const temp = `${e.edge.source.port}-${e.edge.target.port}`;
-                    if ((temp.indexOf('OutputPort') !== -1 && temp.indexOf('InputPort') !== -1) || (temp.indexOf('OutputValuePort') !== -1 && temp.indexOf('InputValuePort') !== -1)) {
+                    if ((temp.indexOf('Output:Port') !== -1 && temp.indexOf('Input:Port') !== -1) || (temp.indexOf('Output:Port:Value') !== -1 && temp.indexOf('Input:Port:Value') !== -1)) {
                         return true;
                     } else {
                         return false;

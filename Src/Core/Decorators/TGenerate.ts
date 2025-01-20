@@ -7,7 +7,7 @@ type GenerateOptions = {
 };
 
 type Port = {
-    type: 'InputPort' | 'OutputPort' | 'InputValuePort' | 'OutputValuePort';
+    type: 'Input:Port' | 'Output:Port' | 'Input:Port:Value' | 'Output:Port:Value';
     id: string;
     label: string;
     row: number;
@@ -17,7 +17,7 @@ namespace TGenerate {
     const group: {
         [name: string]: PortManager.GroupMetadata;
     } = {
-        InputPort: {
+        'Input:Port': {
             attrs: {
                 circle: {
                     r: 5,
@@ -38,7 +38,7 @@ namespace TGenerate {
                 position: 'right'
             }
         },
-        InputValuePort: {
+        'Input:Port:Value': {
             attrs: {
                 circle: {
                     r: 4,
@@ -59,7 +59,7 @@ namespace TGenerate {
                 position: 'right'
             }
         },
-        OutputPort: {
+        'Output:Port': {
             attrs: {
                 circle: {
                     r: 5,
@@ -80,7 +80,7 @@ namespace TGenerate {
                 position: 'left'
             }
         },
-        OutputValuePort: {
+        'Output:Port:Value': {
             attrs: {
                 circle: {
                     r: 4,
@@ -125,7 +125,7 @@ namespace TGenerate {
                                 return {
                                     id: `${p.type}:${p.id}`,
                                     group: p.type,
-                                    args: { x: p.type === 'OutputPort' || p.type === 'OutputValuePort' ? options.width - 20 : 20, y: 50 + p.row * 25 },
+                                    args: { x: p.type === 'Output:Port' || p.type === 'Output:Port:Value' ? options.width - 20 : 20, y: 50 + p.row * 25 },
                                     attrs: {
                                         text: { text: p.label }
                                     }

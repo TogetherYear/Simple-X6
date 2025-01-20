@@ -6,8 +6,8 @@ import { TGenerate } from '../Decorators/TGenerate';
 @TGenerate.Generate({
     width: 180,
     port: [
-        { id: 'Root', type: 'InputPort', label: '入口', row: 0 },
-        { id: 'Boolean', type: 'InputValuePort', label: 'Boolean', row: 1 }
+        { id: 'Root', type: 'Input:Port', label: '入口', row: 0 },
+        { id: 'Boolean', type: 'Input:Port:Value', label: 'Boolean', row: 1 }
     ]
 })
 class Branch extends Actor {
